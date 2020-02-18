@@ -19,8 +19,8 @@ export class MessagesComponent {
     }
 
     ngOnInit() {
-        var res = webService.getMessages();
-        console.log('res-dev:', res);
+        //var res = webService.getMessages();
+        //console.log('res-dev:', res);
         //var response = this.webService.getMessages();
         //console.log('info:', response);
     }
