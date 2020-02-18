@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WebService } from './web.service';
 
 @Component({
@@ -13,16 +13,20 @@ import { WebService } from './web.service';
     `
 })
 
-export class MessagesComponent {
+export class MessagesComponent implements OnInit {
+    messages: any;
     constructor(private webService: WebService) {
-
     }
-
     ngOnInit() {
-        //var res = webService.getMessages();
-        //console.log('res-dev:', res);
-        //var response = this.webService.getMessages();
-        //console.log('info:', response);
+        this.getMessages();
+
     }
-    messages = [{ text: "some text", owner: "Tim" }, { text: "other message", owner: "Jane" }];
+    getMessages() {
+        this.webService
+            .getMessages()
+            .subscribe(messages => {
+                this.messages = messages;
+                console.log(this.messages);
+            });
+    }
 }
