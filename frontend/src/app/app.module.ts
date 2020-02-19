@@ -6,28 +6,32 @@ import {
   MatCardModule,
   MatInputModule,
   MatSnackBarModule,
-  MatToolbarModule
+  MatToolbarModule,
 } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { WebService } from './web.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MessagesComponent } from './messages.component';
+import { NewMessageComponent } from './new-message.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MessagesComponent
+    MessagesComponent,
+    NewMessageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatCardModule,
     MatInputModule,
+    MatCardModule,
+    MatFormFieldModule,
     MatSnackBarModule,
     MatToolbarModule,
     HttpClientModule
