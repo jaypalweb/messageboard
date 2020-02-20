@@ -8,7 +8,7 @@ import { WebService } from './web.service';
         <mat-card class="card">
             <mat-card-content>
                 <mat-form-field>
-                    <input matInput value={{owner}} placeholder="Name">
+                    <input matInput [(ngModel)]="owner" placeholder="Name">
                 </mat-form-field>
                 <mat-form-field>
                     <textarea matInput placeholder="Message"></textarea>
