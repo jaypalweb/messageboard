@@ -20,13 +20,8 @@ api.get('/messages', (req, res) => {
 
 api.post('/messages', (req, res) => {
     console.log('--post message--');
-    console.log(req.body);
     messages.push(req.body);
-
-    //below line some text we need to send to avoid error in angular
-    //ref - https://github.com/webix-hub/webix-remote-js/issues/4
-    res.json({ status: "OK" });
-    res.sendStatus(200);
+    res.json(req.body);
 });
 
 app.use('/api', api);

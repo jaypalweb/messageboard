@@ -1,24 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-//import { Observable } from 'rxjs';
-//ref- https://stackoverflow.com/questions/37208801/property-map-does-not-exist-on-type-observableresponse
-//ref-https://stackoverflow.com/questions/46630893/angular-res-json-is-not-a-function
+
 @Injectable()
 
 export class WebService {
     BASE_URL: string = 'http://localhost:63145/api';
-
+    messages: any = [];
     constructor(private http: HttpClient) {
+        this.getMessages();
     }
 
     getMessages() {
-        return this.http.get(this.BASE_URL + '/messages');
+        this.http.get(this.BASE_URL + '/messages').subscribe(messages => {
+            this.messages = messages;
+            console.log(this.messages);
+        });
     }
 
     postMessage(message) {
-        //console.log('Jay Message', message);
         //message = { owner: "jay", text: "hello text" }
-        return this.http.post(this.BASE_URL + '/messages', message).subscribe();
+        return this.http.post(this.BASE_URL + '/messages', message).subscribe(onemessage => {
+            this.messages.push(onemessage);
+            console.log(this.messages);
+        });
     }
 }
