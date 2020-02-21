@@ -14,12 +14,18 @@ app.use((req, res, next) => {
 var api = express.Router();
 
 api.get('/messages', (req, res) => {
+    console.log('--get message--');
     res.json(messages);
 });
 
 api.post('/messages', (req, res) => {
-    //console.log(req.body);
+    console.log('--post message--');
+    console.log(req.body);
     messages.push(req.body);
+
+    //below line some text we need to send to avoid error in angular
+    //ref - https://github.com/webix-hub/webix-remote-js/issues/4
+    res.json({ status: "OK" });
     res.sendStatus(200);
 });
 

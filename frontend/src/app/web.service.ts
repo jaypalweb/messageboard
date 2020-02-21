@@ -7,11 +7,18 @@ import { map } from 'rxjs/operators';
 @Injectable()
 
 export class WebService {
-    messages: any = [{ text: "some text", owner: "Tim" }, { text: "other message", owner: "Jane" }];
-    constructor(private http: HttpClient) {
+    BASE_URL: string = 'http://localhost:63145/api';
 
+    constructor(private http: HttpClient) {
     }
+
     getMessages() {
-        return this.http.get('http://localhost:63145/api/messages');
+        return this.http.get(this.BASE_URL + '/messages');
+    }
+
+    postMessage(message) {
+        //console.log('Jay Message', message);
+        //message = { owner: "jay", text: "hello text" }
+        return this.http.post(this.BASE_URL + '/messages', message).subscribe();
     }
 }

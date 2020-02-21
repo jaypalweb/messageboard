@@ -26,6 +26,6 @@ export class NewMessageComponent {
     constructor(private webService: WebService) {
     }
     post() {
-        console.log(this.message);
+        this.webService.postMessage(this.message);
     }
 }
