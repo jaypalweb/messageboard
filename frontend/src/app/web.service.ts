@@ -13,7 +13,8 @@ export class WebService {
     getMessages() {
         this.http.get(this.BASE_URL + '/messages').subscribe(messages => {
             this.messages = messages;
-            console.log(this.messages);
+        }, err => {
+            console.log('Unable to get messages: ' + err.message);
         });
     }
 
