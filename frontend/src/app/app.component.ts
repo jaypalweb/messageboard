@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MessagesComponent } from './messages.component';
 
 @Component({
@@ -11,7 +11,10 @@ import { MessagesComponent } from './messages.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild(MessagesComponent, { static: false }) messages: MessagesComponent;
+
   onPosted(message) {
-    console.log(message);
+    //console.log(message);
+    this.messages.messages.push(message);
   }
 }
