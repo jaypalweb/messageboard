@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { WebService } from './web.service';
 //ref- https://stackoverflow.com/questions/46705101/mat-form-field-must-contain-a-matformfieldcontrol
 //ref - https://stackblitz.com/edit/angular-xpvwzf?file=app%2Fapp.component.html
@@ -22,10 +22,13 @@ import { WebService } from './web.service';
 })
 
 export class NewMessageComponent {
-    message = { owner: "", text: "" };
+    @Output() onPosted = new EventEmitter();
+
     constructor(private webService: WebService) {
     }
+    message = { owner: "", text: "" };
     post() {
         this.webService.postMessage(this.message);
+        this.onPosted.emit(this.message);
     }
 }
