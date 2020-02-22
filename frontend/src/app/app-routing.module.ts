@@ -10,6 +10,9 @@ const routes: Routes = [
   },
   {
     path: 'messages', component: MessagesComponent
+  },
+  {
+    path: 'messages/:name', component: MessagesComponent
   }
 ];
 
