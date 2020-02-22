@@ -14,16 +14,20 @@ import { WebService } from './web.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home.component';
 import { MessagesComponent } from './messages.component';
 import { NewMessageComponent } from './new-message.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavComponent } from './nav.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MessagesComponent,
-    NewMessageComponent
+    NewMessageComponent,
+    NavComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

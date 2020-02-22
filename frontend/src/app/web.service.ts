@@ -23,7 +23,7 @@ export class WebService {
         return this.http.post(this.BASE_URL + '/messages', message).subscribe(onemessage => {
             this.messages.push(onemessage);
         }, err => {
-            this.handleError('Unable to post messages');
+            this.handleError('Unable to post message');
         });
     }
     private handleError(error) {
