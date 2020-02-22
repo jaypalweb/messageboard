@@ -10,8 +10,9 @@ export class WebService {
         this.getMessages();
     }
 
-    getMessages() {
-        this.http.get(this.BASE_URL + '/messages').subscribe(messages => {
+    getMessages(user?) {
+        user = (user) ? '/' + user : '';
+        this.http.get(this.BASE_URL + '/messages' + user).subscribe(messages => {
             this.messages = messages;
         }, err => {
             this.handleError('Unable to get messages');
