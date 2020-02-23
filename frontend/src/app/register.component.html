@@ -1,7 +1,9 @@
 <mat-card class="card">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <mat-form-field>
-            <input matInput style="width:350px;" placeholder="First Name" formControlName="firstName">
+            <input matInput style="width:350px;"
+                [ngClass]="{'error': form.controls.firstName.invalid && form.controls.firstName.touched}"
+                placeholder="First Name" formControlName="firstName">
         </mat-form-field>
         <mat-form-field>
             <input matInput style="width:350px;" placeholder="Last Name" formControlName="lastName">

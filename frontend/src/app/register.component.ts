@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Form } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 @Component({
     selector: 'app-register',
-    templateUrl: './register.component.html'
+    templateUrl: './register.component.html',
+    styles: [`
+    .error{
+        background-color:#fff0f0;
+    }
+    `]
 })
 export class RegisterComponent {
     form;
     constructor(private fb: FormBuilder) {
         this.form = fb.group({
-            firstName: '',
+            firstName: ['', Validators.required],
             lastName: '',
             email: '',
             password: '',
@@ -17,6 +22,7 @@ export class RegisterComponent {
         });
     }
     onSubmit() {
+        console.log(this.form.valid);
         console.log(this.form.value);
     }
 }
