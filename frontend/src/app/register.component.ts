@@ -14,10 +14,10 @@ export class RegisterComponent {
     constructor(private fb: FormBuilder) {
         this.form = fb.group({
             firstName: ['', Validators.required],
-            lastName: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
+            lastName: ['', Validators.required],
+            email: ['', Validators.required],
+            password: ['', Validators.required],
+            confirmPassword: ['', Validators.required]
 
         });
     }
