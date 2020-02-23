@@ -1,0 +1,1 @@
+for some reason input type="email" not working. Not showing any alert by browser
