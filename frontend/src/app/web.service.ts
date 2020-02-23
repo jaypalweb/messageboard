@@ -28,6 +28,7 @@ export class WebService {
         //message = { owner: "jay", text: "hello text" }
         return this.http.post(this.BASE_URL + '/messages', message).subscribe(onemessage => {
             this.messageStore.push(onemessage);
+            this.messageSubject.next(this.messageStore);
         }, err => {
             this.handleError('Unable to post message');
         });
