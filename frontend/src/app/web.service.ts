@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material'
+import { MatSnackBar } from '@angular/material';
+import { Subject } from 'rxjs';
+
 @Injectable()
 
 export class WebService {
     BASE_URL: string = 'http://localhost:63145/api';
-    messages: any = [];
+    private messages: any = [];
+    messageSubject = new Subject();
     constructor(private http: HttpClient, private sb: MatSnackBar) {
         this.getMessages();
     }
@@ -14,6 +17,7 @@ export class WebService {
         user = (user) ? '/' + user : '';
         this.http.get(this.BASE_URL + '/messages' + user).subscribe(messages => {
             this.messages = messages;
+            this.messageSubject.next(this.messages);
         }, err => {
             this.handleError('Unable to get messages');
         });
