@@ -7,8 +7,9 @@ import { Subject } from 'rxjs';
 
 export class WebService {
     BASE_URL: string = 'http://localhost:63145/api';
-    private messages: any = [];
-    messageSubject = new Subject();
+    private messageStore: any = [];
+    private messageSubject = new Subject();
+    messages = this.messageSubject.asObservable();
     constructor(private http: HttpClient, private sb: MatSnackBar) {
         this.getMessages();
     }
@@ -16,8 +17,8 @@ export class WebService {
     getMessages(user?) {
         user = (user) ? '/' + user : '';
         this.http.get(this.BASE_URL + '/messages' + user).subscribe(messages => {
-            this.messages = messages;
-            this.messageSubject.next(this.messages);
+            this.messageStore = messages;
+            this.messageSubject.next(this.messageStore);
         }, err => {
             this.handleError('Unable to get messages');
         });
@@ -26,7 +27,7 @@ export class WebService {
     postMessage(message) {
         //message = { owner: "jay", text: "hello text" }
         return this.http.post(this.BASE_URL + '/messages', message).subscribe(onemessage => {
-            this.messages.push(onemessage);
+            this.messageStore.push(onemessage);
         }, err => {
             this.handleError('Unable to post message');
         });
