@@ -20,7 +20,7 @@ import { NewMessageComponent } from './new-message.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav.component';
 import { RegisterComponent } from './register.component';
-
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { RegisterComponent } from './register.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [WebService],
+  providers: [WebService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
