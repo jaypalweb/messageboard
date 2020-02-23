@@ -25,4 +25,8 @@ export class RegisterComponent {
         console.log(this.form.valid);
         console.log(this.form.value);
     }
+
+    isValid(control) {
+        return this.form.controls[control].invalid && this.form.controls[control].touched;
+    }
 }
