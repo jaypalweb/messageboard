@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
@@ -19,6 +19,7 @@ import { MessagesComponent } from './messages.component';
 import { NewMessageComponent } from './new-message.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav.component';
+import { RegisterComponent } from './register.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NavComponent } from './nav.component';
     MessagesComponent,
     NewMessageComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { NavComponent } from './nav.component';
     MatSnackBarModule,
     MatToolbarModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [WebService],
   bootstrap: [AppComponent]
