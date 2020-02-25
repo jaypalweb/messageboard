@@ -38,12 +38,12 @@ auth.post('/register', (req, res) => {
     console.log('--register and get token--');
     var index = users.push(req.body) - 1;
     // console.log(index);
-    // console.log(users);
+    console.log(users);
     // process.exit();//--equivalent to php die();
     var user = users[index];
     user.id = index;
     var token = jwt.sign(user.id, '123');
-    res.json(token);
+    res.json({ firstName: user.firstName, token: token });
 });
 
 app.use('/api', api);
