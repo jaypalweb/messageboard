@@ -23,8 +23,8 @@ export class RegisterComponent {
         }, { validator: matchingFields('password', 'confirmPassword') });
     }
     onSubmit() {
-        //console.log(this.form.errors);
-        this.auth.register(this.form.value);
+        if (this.form.valid)
+            this.auth.register(this.form.value);
     }
 
     isValid(control) {
