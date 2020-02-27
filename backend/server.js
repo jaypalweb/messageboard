@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 var app = express();
 
 var messages = [{ text: "some text", owner: "Tim" }, { text: "other message", owner: "Jane" }];
-var users = [];
+var users = [{ firstName: 'a', email: 'a@a.com', password: 'a', id: 0 }]; //for checking
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -34,6 +34,20 @@ api.post('/messages', (req, res) => {
     res.json(req.body);
 });
 
+auth.post('/login', (req, res) => {
+    var user = users.find(user => user.email == req.body.email);
+    if (!user) {
+        sendAuthError(res);
+    }
+
+    if (user.password == req.body.password) {
+        sendToken(user, res);
+    }
+    else {
+        sendAuthError(res);
+    }
+});
+
 auth.post('/register', (req, res) => {
     console.log('--register and get token--');
     var index = users.push(req.body) - 1;
@@ -42,9 +56,17 @@ auth.post('/register', (req, res) => {
     // process.exit();//--equivalent to php die();
     var user = users[index];
     user.id = index;
+    sendToken(user, res);
+});
+
+function sendToken(user, res) {
     var token = jwt.sign(user.id, '123');
     res.json({ firstName: user.firstName, token: token });
-});
+}
+
+function sendAuthError(res) {
+    return res.json({ success: false, message: "email or password incorrect" });
+}
 
 app.use('/api', api);
 app.use('/auth', auth);

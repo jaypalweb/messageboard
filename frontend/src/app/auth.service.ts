@@ -24,22 +24,31 @@ export class AuthService {
         return !!localStorage.getItem(this.TOKEN_KEY);
     }
 
+    login(loginData) {
+        this.http.post(this.BASE_URL + '/login', loginData).subscribe(res => {
+            this.authenticate(res);
+        });
+    }
     register(user) {
         delete user.confirmPassword;
         return this.http.post(this.BASE_URL + '/register', user).subscribe(res => {
-            var authResponse = res;
-            if (!authResponse['token']) {
-                return;
-            }
-            localStorage.setItem(this.TOKEN_KEY, authResponse['token']);
-            localStorage.setItem(this.NAME_KEY, authResponse['firstName']);
-            this.router.navigate(['/']);
+            this.authenticate(res);
         });
     }
 
     logout() {
         localStorage.removeItem(this.TOKEN_KEY);
         localStorage.removeItem(this.NAME_KEY);
+    }
+
+    authenticate(res) {
+        var authResponse = res;
+        if (!authResponse['token']) {
+            return;
+        }
+        localStorage.setItem(this.TOKEN_KEY, authResponse['token']);
+        localStorage.setItem(this.NAME_KEY, authResponse['firstName']);
+        this.router.navigate(['/']);
     }
 
 }
