@@ -39,6 +39,14 @@ api.get('/user/me', checkAuthenticated, (req, res) => {
     //console.log('/user/me', req.user);
 })
 
+api.post('/user/me', checkAuthenticated, (req, res) => {
+    //res.json(users[req.user]);
+    var user = users[req.user];
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    res.json(user);
+})
+
 auth.post('/login', (req, res) => {
     var user = users.find(user => user.email == req.body.email);
     if (!user) {
