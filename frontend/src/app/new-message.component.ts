@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
 import { WebService } from './web.service';
-//ref- https://stackoverflow.com/questions/46705101/mat-form-field-must-contain-a-matformfieldcontrol
-//ref - https://stackblitz.com/edit/angular-xpvwzf?file=app%2Fapp.component.html
+import { AuthService } from './auth.service';
+
 @Component({
     selector: 'app-new-message',
     template: `
         <mat-card class="card">
             <mat-card-content>
-                <mat-form-field>
-                    <input matInput [(ngModel)]="message.owner" placeholder="Name">
-                </mat-form-field>
                 <mat-form-field>
                     <textarea matInput [(ngModel)]="message.text" placeholder="Message"></textarea>
                 </mat-form-field>
@@ -22,9 +19,9 @@ import { WebService } from './web.service';
 })
 
 export class NewMessageComponent {
-    constructor(private webService: WebService) {
+    constructor(private webService: WebService, private auth: AuthService) {
     }
-    message = { owner: "", text: "" };
+    message = { owner: this.auth.name, text: "" };
     post() {
         this.webService.postMessage(this.message);
     }
