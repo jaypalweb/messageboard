@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -23,12 +23,24 @@ export class AuthService {
     get isAuthenticated() {
         return !!localStorage.getItem(this.TOKEN_KEY);
     }
+    get tokenHeader() {
+        //not working code
+        //var header = new Headers({ 'Authorization': 'Bearer' + localStorage.getItem(this.TOKEN_KEY) });
+        //return new RequestOptions({ headers: header });
+        //working code below
+        let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem(this.TOKEN_KEY) });
+        let options = {
+            headers: headers
+        }
+        return options;
+    }
 
     login(loginData) {
         this.http.post(this.BASE_URL + '/login', loginData).subscribe(res => {
             this.authenticate(res);
         });
     }
+
     register(user) {
         delete user.confirmPassword;
         return this.http.post(this.BASE_URL + '/register', user).subscribe(res => {
